@@ -1,5 +1,6 @@
 package com.tommyapps.weatheronandroid
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.*
@@ -33,7 +34,7 @@ class ChangeLocalization: AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,  country)
         countryAutoCompleteTextView?.threshold = 0
         countryAutoCompleteTextView?.setAdapter(adapter)
-        countryAutoCompleteTextView?.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus -> if(hasFocus) countryAutoCompleteTextView?.showDropDown() })
+        //countryAutoCompleteTextView?.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus -> if(hasFocus) countryAutoCompleteTextView?.showDropDown() })
 
     }
 
@@ -41,9 +42,26 @@ class ChangeLocalization: AppCompatActivity() {
 
         if (checkCountryName() && checkCity()) {
 
-            Toast.makeText(applicationContext, "${createLink()}", Toast.LENGTH_SHORT).show()
+            var apiConnection = ApiConnection(createLink())
+            var map = HashMap<String, String>()
+            apiConnection.show()
+            map = apiConnection.weatherMap
 
+            sendIntent(map)
         }
+    }
+
+    fun sendIntent(map: HashMap<String, String>) {
+
+        var intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("map", map)
+        print(map["city"])
+        print(map["city"])
+        print(map["city"])
+        print(map["city"])
+        print(map["city"])
+        setResult(0, intent)
+        finish()
 
     }
 
@@ -77,7 +95,10 @@ class ChangeLocalization: AppCompatActivity() {
 
     private fun createLink(): String {
 
-        return "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "," + countryCode + "&units=metric&lang=pl&mode=xml&APPID=8cbc4f1e6576a2478f1d70e0a17cc594"
+        val apiKey: String = "8cbc4f1e6576a2478f1d70e0a17cc594"
+
+        return "http://api.openweathermap.org/data/2.5/weather?q=$cityName,$countryCode&appid=$apiKey&units=metric&lang=pl"
+        //return "http://api.openweathermap.org/data/2.5/forecast?q=$cityName,$countryCode&units=metric&lang=pl&mode=xml&APPID=8cbc4f1e6576a2478f1d70e0a17cc594"
 
     }
 }

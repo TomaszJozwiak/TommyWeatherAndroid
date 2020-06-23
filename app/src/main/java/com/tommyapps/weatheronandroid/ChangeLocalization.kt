@@ -42,24 +42,22 @@ class ChangeLocalization: AppCompatActivity() {
 
         if (checkCountryName() && checkCity()) {
 
-            var apiConnection = ApiConnection(createLink())
-            var map = HashMap<String, String>()
-            apiConnection.show()
-            map = apiConnection.weatherMap
+            var currentWeatherCalculations: CurrentWeatherCalculations = CurrentWeatherCalculations()
+            var map: HashMap<String, String>? = currentWeatherCalculations.getCurrentWeatherData(createLink())
 
-            sendIntent(map)
+            if (map != null) {
+                sendIntent(map)
+            } else {
+                Toast.makeText(applicationContext, "Problem z pobraniem pogody, spróbuj później", Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 
-    fun sendIntent(map: HashMap<String, String>) {
+    private fun sendIntent(map: HashMap<String, String>) {
 
         var intent = Intent(this, MainActivity::class.java)
         intent.putExtra("map", map)
-        print(map["city"])
-        print(map["city"])
-        print(map["city"])
-        print(map["city"])
-        print(map["city"])
         setResult(0, intent)
         finish()
 
@@ -98,7 +96,6 @@ class ChangeLocalization: AppCompatActivity() {
         val apiKey: String = "8cbc4f1e6576a2478f1d70e0a17cc594"
 
         return "http://api.openweathermap.org/data/2.5/weather?q=$cityName,$countryCode&appid=$apiKey&units=metric&lang=pl"
-        //return "http://api.openweathermap.org/data/2.5/forecast?q=$cityName,$countryCode&units=metric&lang=pl&mode=xml&APPID=8cbc4f1e6576a2478f1d70e0a17cc594"
 
     }
 }

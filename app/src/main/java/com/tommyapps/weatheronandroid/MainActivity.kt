@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        title = "Aktualna pogoda"
+
         cityTextView = findViewById<TextView>(R.id.cityTextView)
         countryTextView = findViewById<TextView>(R.id.countryTextView)
         descriptionTextView = findViewById<TextView>(R.id.descriptionTextView)
@@ -78,5 +80,24 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, 0)
 
     }
+
+
+
+
+
+    //list View test
+    fun weekWeather(view: View) {
+
+        val intent = Intent(this, WeekWeather::class.java)
+        intent.putExtra("localization", "${weatherMap["city"]}, ${weatherMap["country"]}")
+        intent.putExtra("longitude", weatherMap["longitude"]);
+        intent.putExtra("latitude", weatherMap["latitude"]);
+        startActivity(intent)
+
+    }
+
+
+
+
 
 }

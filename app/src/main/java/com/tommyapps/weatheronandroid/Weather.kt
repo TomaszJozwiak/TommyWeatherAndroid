@@ -2,6 +2,8 @@ package com.tommyapps.weatheronandroid
 
 class Weather {
 
+    var longitude: String = ""
+    var latitude: String = ""
     var description: String = ""
     var icon: String = ""
     var temperature: String = ""
@@ -14,7 +16,9 @@ class Weather {
 
     constructor() {}
 
-    constructor(initDescription: String,
+    constructor(initLongitude: String,
+                initLatitude: String,
+                initDescription: String,
                 initIcon: String,
                 initTemperature: String,
                 initPressure: String,
@@ -24,6 +28,8 @@ class Weather {
                 initCountry: String,
                 initCity: String) {
 
+        this.longitude = initLongitude
+        this.latitude = initLatitude
         this.description = initDescription
         this.icon = initIcon
         this.temperature = initTemperature

@@ -1,16 +1,14 @@
 package com.tommyapps.weatheronandroid
 
-import org.json.JSONArray
-import org.json.JSONException
 import org.json.JSONObject
 
-class WeekWeatherCalculations {
+class WeekWeatherCalculations(private val longitude: String?, private val latitude: String?) {
 
     var weatherMap = ArrayList<HashMap<String, String>>()
 
-    fun getWeekWeatherData(link: String): ArrayList<HashMap<String, String>>? {
+    fun getWeekWeatherData(): ArrayList<HashMap<String, String>>? {
 
-        var apiConnection: ApiConnection = ApiConnection(link)
+        var apiConnection: ApiConnection = ApiConnection(createLink())
 
         var dataFromApi = apiConnection.getResponseFromApi()
         if (dataFromApi != null) {
@@ -19,6 +17,14 @@ class WeekWeatherCalculations {
         }
 
         return null
+    }
+
+    private fun createLink(): String {
+
+        val apiKey: String = "8cbc4f1e6576a2478f1d70e0a17cc594"
+
+        return "https://api.openweathermap.org/data/2.5/onecall?lat=$latitude&lon=$longitude&exclude=current,minutely,hourly&appid=$apiKey&units=metric&lang=pl"
+
     }
 
     private fun handleJson(jsonString: String?) {

@@ -12,6 +12,7 @@ class ChangeLocalization: AppCompatActivity() {
     private val locationOperations: LocationOperations = LocationOperations(this)
     var countryAutoCompleteTextView: AutoCompleteTextView? = null
     var cityEditText: EditText? = null
+    private lateinit var saveDefaultLocationCheckBox: CheckBox
 
     var cityName: String = ""
     var countryCode: String = ""
@@ -22,6 +23,7 @@ class ChangeLocalization: AppCompatActivity() {
 
         countryAutoCompleteTextView = findViewById<AutoCompleteTextView>(R.id.countryAutoCompleteTextView)
         cityEditText = findViewById<EditText>(R.id.cityEditText)
+        saveDefaultLocationCheckBox = findViewById<CheckBox>(R.id.saveDefaultLocationCheckBox)
 
         setCountryNamesToTextView()
 
@@ -42,8 +44,10 @@ class ChangeLocalization: AppCompatActivity() {
 
         if (checkCountryName() && checkCity()) {
 
-            var currentWeatherCalculations: CurrentWeatherCalculations = CurrentWeatherCalculations()
-            var map: HashMap<String, String>? = currentWeatherCalculations.getCurrentWeatherData(createLink())
+            saveDefaultLocalization()
+
+            var currentWeatherCalculations: CurrentWeatherCalculations = CurrentWeatherCalculations(cityName, countryCode)
+            var map: HashMap<String, String>? = currentWeatherCalculations.getCurrentWeatherData()
 
             if (map != null) {
                 sendIntent(map)
@@ -91,11 +95,17 @@ class ChangeLocalization: AppCompatActivity() {
 
     }
 
-    private fun createLink(): String {
+    private fun saveDefaultLocalization() {
 
-        val apiKey: String = "8cbc4f1e6576a2478f1d70e0a17cc594"
+        if (saveDefaultLocationCheckBox.isChecked) {
 
-        return "http://api.openweathermap.org/data/2.5/weather?q=$cityName,$countryCode&appid=$apiKey&units=metric&lang=pl"
+            var localizationSharedPreferences: LocalizationSharedPreferences = LocalizationSharedPreferences(this)
+            localizationSharedPreferences.clearSharedPreference()
+            localizationSharedPreferences.save("city", cityName)
+            localizationSharedPreferences.save("country", countryCode)
+
+        }
 
     }
+
 }

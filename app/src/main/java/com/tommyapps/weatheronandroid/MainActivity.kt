@@ -38,6 +38,8 @@ class MainActivity : AppCompatActivity() {
         cloudsTextView = findViewById<TextView>(R.id.cloudsTextView)
         iconImageView = findViewById<ImageView>(R.id.iconImageView)
 
+        checkDefaultLocalization()
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -93,6 +95,25 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("longitude", weatherMap["longitude"]);
         intent.putExtra("latitude", weatherMap["latitude"]);
         startActivity(intent)
+
+    }
+
+
+    fun checkDefaultLocalization() {
+
+        var localizationSharedPreferences: LocalizationSharedPreferences = LocalizationSharedPreferences(this)
+        var city = localizationSharedPreferences.getValueString("city")
+        var country = localizationSharedPreferences.getValueString("country")
+
+        if (city != null && country != null) {
+
+            var currentWeatherCalculations = CurrentWeatherCalculations(city, country)
+
+            weatherMap = currentWeatherCalculations.getCurrentWeatherData() as HashMap<String, String>
+
+            setAttributes(weatherMap)
+        }
+
 
     }
 

@@ -2,13 +2,13 @@ package com.tommyapps.weatheronandroid
 
 import org.json.JSONObject
 
-class CurrentWeatherCalculations {
+class CurrentWeatherCalculations(private val cityName: String?, private val countryCode: String?) {
 
     var weatherMap = HashMap<String, String>()
 
-    fun getCurrentWeatherData(link: String): HashMap<String, String>? {
+    fun getCurrentWeatherData(): HashMap<String, String>? {
 
-        var apiConnection: ApiConnection = ApiConnection(link)
+        var apiConnection: ApiConnection = ApiConnection(createLink())
 
         var dataFromApi = apiConnection.getResponseFromApi()
         if (dataFromApi != null) {
@@ -17,6 +17,14 @@ class CurrentWeatherCalculations {
         }
 
         return null
+    }
+
+    private fun createLink(): String {
+
+        val apiKey: String = "8cbc4f1e6576a2478f1d70e0a17cc594"
+
+        return "http://api.openweathermap.org/data/2.5/weather?q=$cityName,$countryCode&appid=$apiKey&units=metric&lang=pl"
+
     }
 
     private fun handleJson(jsonString: String?) {

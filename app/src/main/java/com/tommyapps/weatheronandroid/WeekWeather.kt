@@ -6,15 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.week_weather.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class WeekWeather: AppCompatActivity() {
-
-    private val language = arrayOf<String>("C","C++","Java",".Net","Kotlin","Ruby","Rails")
 
     private var description = ArrayList<String>()
     private var temperature = ArrayList<String>()
@@ -73,8 +70,8 @@ class WeekWeather: AppCompatActivity() {
 
     private fun showWeather() {
 
-        var weekWeatherCalculations: WeekWeatherCalculations = WeekWeatherCalculations()
-        var temp = weekWeatherCalculations.getWeekWeatherData(createLink())
+        var weekWeatherCalculations: WeekWeatherCalculations = WeekWeatherCalculations(longitude, latitude)
+        var temp = weekWeatherCalculations.getWeekWeatherData()
 
         if (temp != null) {
             setArrays(temp)
@@ -154,15 +151,4 @@ class WeekWeather: AppCompatActivity() {
         return monthNameInPolish
 
     }
-
-
-
-    private fun createLink(): String {
-
-        val apiKey: String = "8cbc4f1e6576a2478f1d70e0a17cc594"
-
-        return "https://api.openweathermap.org/data/2.5/onecall?lat=$latitude&lon=$longitude&exclude=current,minutely,hourly&appid=$apiKey&units=metric&lang=pl"
-
-    }
-
 }

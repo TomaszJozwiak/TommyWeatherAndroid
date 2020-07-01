@@ -10,8 +10,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
-class WeekWeather: AppCompatActivity() {
+class HourlyWeather: AppCompatActivity() {
 
     private var description = ArrayList<String>()
     private var temperature = ArrayList<String>()
@@ -19,30 +18,30 @@ class WeekWeather: AppCompatActivity() {
     private var icon = ArrayList<String>()
 
 
-    var weekWeatherArray = ArrayList<HashMap<String, String>>()
+    var hourlyWeatherArray = ArrayList<HashMap<String, String>>()
     private var longitude: String? = null
     private var latitude: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.week_weather)
+        setContentView(R.layout.hourly_weather)
 
-        title = "Tygodniowa pogoda"
+        title = "Godzinna pogoda"
 
         val intent = intent
         longitude = intent.getStringExtra("longitude")
         latitude = intent.getStringExtra("latitude")
 
-        val localizationTextView = findViewById<TextView>(R.id.localizationWeekWeatherTextView)
+        val localizationHourlyWeatherTextView = findViewById<TextView>(R.id.localizationHourlyWeatherTextView)
 
-        localizationTextView.text = (intent.getStringExtra("localization"))
+        localizationHourlyWeatherTextView.text = (intent.getStringExtra("localization"))
 
         showWeather()
 
-        var listView: ListView = findViewById<ListView>(R.id.listView)
+        var hourlyWeatherListView: ListView = findViewById<ListView>(R.id.hourlyWeatherListView)
 
         val myListAdapter = MyListAdapter(this, description, temperature, date, icon)
-        listView.adapter = myListAdapter
+        hourlyWeatherListView.adapter = myListAdapter
     }
 
     inner class MyListAdapter(private val context: Activity, private val tempDescription: ArrayList<String>, private val tempTemperature: ArrayList<String>, private val tempDate: ArrayList<String>, private val tempIcon: ArrayList<String>)
@@ -52,17 +51,17 @@ class WeekWeather: AppCompatActivity() {
             val inflater = context.layoutInflater
             val rowView = inflater.inflate(R.layout.weather_item, null, true)
 
-            val weekWeatherDescriptionTextView = rowView.findViewById(R.id.weatherItemDescriptionTextView) as TextView
-            val weekWeatherTemperatureTextView = rowView.findViewById(R.id.weatherItemTemperatureTextView) as TextView
-            val weekWeatherImageView = rowView.findViewById(R.id.weatherItemImageView) as ImageView
-            val weekWeatherDateTextView = rowView.findViewById(R.id.weatherItemDateTextView) as TextView
+            val weatherItemDescriptionTextView = rowView.findViewById(R.id.weatherItemDescriptionTextView) as TextView
+            val weatherItemTemperatureTextView = rowView.findViewById(R.id.weatherItemTemperatureTextView) as TextView
+            val weatherItemImageView = rowView.findViewById(R.id.weatherItemImageView) as ImageView
+            val weatherItemDateTextView = rowView.findViewById(R.id.weatherItemDateTextView) as TextView
 
 
-            weekWeatherDescriptionTextView.text = tempDescription[position]
-            weekWeatherTemperatureTextView.text = tempTemperature[position]
-            weekWeatherDateTextView.text = convertDate(tempDate[position])
+            weatherItemDescriptionTextView.text = tempDescription[position]
+            weatherItemTemperatureTextView.text = tempTemperature[position]
+            weatherItemDateTextView.text = convertDate(tempDate[position])
             val resourceId: Int = resources.getIdentifier(tempIcon[position], "drawable", packageName)
-            weekWeatherImageView.setImageResource(resourceId)
+            weatherItemImageView.setImageResource(resourceId)
 
             return rowView
         }
@@ -70,8 +69,8 @@ class WeekWeather: AppCompatActivity() {
 
     private fun showWeather() {
 
-        var weekWeatherCalculations: WeekWeatherCalculations = WeekWeatherCalculations(longitude, latitude)
-        var temp = weekWeatherCalculations.getWeekWeatherData()
+        var hourlyWeatherCalculations: HourlyWeatherCalculations = HourlyWeatherCalculations(longitude, latitude)
+        var temp = hourlyWeatherCalculations.getHourlyWeatherData()
 
         if (temp != null) {
             setArrays(temp)
@@ -118,37 +117,13 @@ class WeekWeather: AppCompatActivity() {
     private fun convertDate(unixTime: String): String {
 
         val unixSeconds: Long = unixTime.toLong()
-        val date = Date(unixSeconds * 1000L)
+        val date = Date((unixSeconds + 7200) * 1000L)
 
-        var day = SimpleDateFormat("dd")
-        var month = SimpleDateFormat("MMMM")
-        var year = SimpleDateFormat("yyyy")
+        var hour = SimpleDateFormat("kk", Locale.UK)
 
-        return "${day.format(date)} ${setMonthName(month.format(date))} ${year.format(date)}"
+        return "${hour.format(date)}:00"
 
     }
 
-    private fun setMonthName(monthName: String): String {
 
-        var monthNameInPolish: String = ""
-
-        when(monthName) {
-
-            "January" -> monthNameInPolish = "Styczeń"
-            "February" -> monthNameInPolish = "Luty"
-            "March" -> monthNameInPolish = "Marzec"
-            "April" -> monthNameInPolish = "Kwiecień"
-            "May" -> monthNameInPolish = "Maj"
-            "June" -> monthNameInPolish = "Czerwiec"
-            "July" -> monthNameInPolish = "Lipiec"
-            "August" -> monthNameInPolish = "Sierpień"
-            "September" -> monthNameInPolish = "Wrzesień"
-            "October" -> monthNameInPolish = "Październik"
-            "November" -> monthNameInPolish = "Listopad"
-            "December" -> monthNameInPolish = "Grudzień"
-        }
-
-        return monthNameInPolish
-
-    }
 }

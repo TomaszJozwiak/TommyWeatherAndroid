@@ -98,8 +98,18 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun hourlyWeather(view: View) {
 
-    fun checkDefaultLocalization() {
+        val intent = Intent(this, HourlyWeather::class.java)
+        intent.putExtra("localization", "${weatherMap["city"]}, ${weatherMap["country"]}")
+        intent.putExtra("longitude", weatherMap["longitude"]);
+        intent.putExtra("latitude", weatherMap["latitude"]);
+        startActivity(intent)
+
+    }
+
+
+    private fun checkDefaultLocalization() {
 
         var localizationSharedPreferences: LocalizationSharedPreferences = LocalizationSharedPreferences(this)
         var city = localizationSharedPreferences.getValueString("city")

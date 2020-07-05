@@ -1,6 +1,7 @@
 package com.tommyapps.weatheronandroid
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class WeekWeather: AppCompatActivity() {
     var weekWeatherArray = ArrayList<HashMap<String, String>>()
     private var longitude: String? = null
     private var latitude: String? = null
+    private var localization: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +37,8 @@ class WeekWeather: AppCompatActivity() {
 
         val localizationTextView = findViewById<TextView>(R.id.localizationWeekWeatherTextView)
 
-        localizationTextView.text = (intent.getStringExtra("localization"))
+        localization = intent.getStringExtra("localization")
+        localizationTextView.text = (localization)
 
         showWeather()
 
@@ -151,4 +154,26 @@ class WeekWeather: AppCompatActivity() {
         return monthNameInPolish
 
     }
+
+    fun actualWeather(view: View) {
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("localization", localization)
+        intent.putExtra("longitude",longitude);
+        intent.putExtra("latitude", latitude);
+        startActivity(intent)
+
+    }
+
+    fun hourlyWeather(view: View) {
+
+        val intent = Intent(this, HourlyWeather::class.java)
+        intent.putExtra("localization", localization)
+        intent.putExtra("longitude",longitude);
+        intent.putExtra("latitude", latitude);
+        startActivity(intent)
+
+    }
+
+
 }

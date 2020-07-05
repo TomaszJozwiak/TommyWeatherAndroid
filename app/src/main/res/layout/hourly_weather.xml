@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#BCDCEF"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,9 +16,13 @@
 
         <Button
             android:id="@+id/actualWeatherButton"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aktualna Pogoda"
+            android:onClick="actualWeather"
+            android:background="@drawable/round_button"
+            android:text="Current Weather"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/divider2"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,9 +30,13 @@
 
         <Button
             android:id="@+id/weekWeatherButton"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tygodniowa Pogoda"
+            android:onClick="weekWeather"
+            android:text="Week Weather"
+            android:background="@drawable/round_button"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_width="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/divider2"

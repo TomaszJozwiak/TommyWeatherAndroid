@@ -1,6 +1,7 @@
 package com.tommyapps.weatheronandroid
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ class HourlyWeather: AppCompatActivity() {
     var hourlyWeatherArray = ArrayList<HashMap<String, String>>()
     private var longitude: String? = null
     private var latitude: String? = null
+    private var localization: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +36,8 @@ class HourlyWeather: AppCompatActivity() {
 
         val localizationHourlyWeatherTextView = findViewById<TextView>(R.id.localizationHourlyWeatherTextView)
 
-        localizationHourlyWeatherTextView.text = (intent.getStringExtra("localization"))
+        localization = intent.getStringExtra("localization")
+        localizationHourlyWeatherTextView.text = localization
 
         showWeather()
 
@@ -122,6 +125,26 @@ class HourlyWeather: AppCompatActivity() {
         var hour = SimpleDateFormat("kk", Locale.UK)
 
         return "${hour.format(date)}:00"
+
+    }
+
+    fun weekWeather(view: View) {
+
+        val intent = Intent(this, WeekWeather::class.java)
+        intent.putExtra("localization", localization)
+        intent.putExtra("longitude",longitude);
+        intent.putExtra("latitude", latitude);
+        startActivity(intent)
+
+    }
+
+    fun actualWeather(view: View) {
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("localization", localization)
+        intent.putExtra("longitude",longitude);
+        intent.putExtra("latitude", latitude);
+        startActivity(intent)
 
     }
 

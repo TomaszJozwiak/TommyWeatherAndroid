@@ -16,13 +16,13 @@
 
         <Button
             android:id="@+id/actualWeatherButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="actualWeather"
-            android:background="@drawable/round_button"
-            android:text="Current Weather"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_width="0dp"
+            android:background="@drawable/round_button"
+            android:onClick="actualWeather"
+            android:text="@string/currentWeather"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/divider2"
@@ -31,13 +31,13 @@
 
         <Button
             android:id="@+id/hourlyWeatherButton"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:onClick="hourlyWeather"
-            android:background="@drawable/round_button"
-            android:text="Hour Weather"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_width="0dp"
+            android:background="@drawable/round_button"
+            android:onClick="hourlyWeather"
+            android:text="@string/hourWeather"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +61,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintWeekWeatherLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -72,7 +73,7 @@
         android:id="@+id/localizationWeekWeatherTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="localizationTextView"
+        android:text="@string/LocalizationTextView"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/listView"

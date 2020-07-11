@@ -45,22 +45,7 @@ class WeekWeatherCalculations(private val longitude: String?, private val latitu
 
             weatherMap.add(map)
         }
-
-        example()
-
     }
 
-    private fun example() {
-
-        for (i in (0 until weatherMap.size)) {
-
-            println(weatherMap[i]["date"])
-            println(weatherMap[i]["temperature"])
-            println(weatherMap[i]["icon"])
-            println(weatherMap[i]["description"])
-
-        }
-
-    }
 
 }

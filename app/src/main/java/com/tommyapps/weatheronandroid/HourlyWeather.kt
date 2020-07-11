@@ -18,8 +18,6 @@ class HourlyWeather: AppCompatActivity() {
     private var date = ArrayList<String>()
     private var icon = ArrayList<String>()
 
-
-    var hourlyWeatherArray = ArrayList<HashMap<String, String>>()
     private var longitude: String? = null
     private var latitude: String? = null
     private var localization: String? = null
@@ -72,8 +70,8 @@ class HourlyWeather: AppCompatActivity() {
 
     private fun showWeather() {
 
-        var hourlyWeatherCalculations: HourlyWeatherCalculations = HourlyWeatherCalculations(longitude, latitude)
-        var temp = hourlyWeatherCalculations.getHourlyWeatherData()
+        val hourlyWeatherCalculations: HourlyWeatherCalculations = HourlyWeatherCalculations(longitude, latitude)
+        val temp = hourlyWeatherCalculations.getHourlyWeatherData()
 
         if (temp != null) {
             setArrays(temp)

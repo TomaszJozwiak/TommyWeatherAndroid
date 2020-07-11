@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.choose_location.*
 
 class ChangeLocalization: AppCompatActivity() {
 
@@ -36,7 +35,6 @@ class ChangeLocalization: AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1,  country)
         countryAutoCompleteTextView?.threshold = 0
         countryAutoCompleteTextView?.setAdapter(adapter)
-        //countryAutoCompleteTextView?.setOnFocusChangeListener(View.OnFocusChangeListener { v, hasFocus -> if(hasFocus) countryAutoCompleteTextView?.showDropDown() })
 
     }
 
@@ -46,21 +44,21 @@ class ChangeLocalization: AppCompatActivity() {
 
             saveDefaultLocalization()
 
-            var currentWeatherCalculations: CurrentWeatherCalculations = CurrentWeatherCalculations(cityName, countryCode)
-            var map: HashMap<String, String>? = currentWeatherCalculations.getCurrentWeatherData()
+            val currentWeatherCalculations: CurrentWeatherCalculations = CurrentWeatherCalculations(cityName, countryCode)
+            val map: HashMap<String, String>? = currentWeatherCalculations.getCurrentWeatherData()
 
             if (map != null) {
                 sendIntent(map)
             } else {
                 Toast.makeText(applicationContext, "Problem z pobraniem pogody, spróbuj później", Toast.LENGTH_LONG).show()
             }
-
         }
+
     }
 
     private fun sendIntent(map: HashMap<String, String>) {
 
-        var intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.putExtra("map", map)
         setResult(0, intent)
         finish()
@@ -99,7 +97,7 @@ class ChangeLocalization: AppCompatActivity() {
 
         if (saveDefaultLocationCheckBox.isChecked) {
 
-            var localizationSharedPreferences: LocalizationSharedPreferences = LocalizationSharedPreferences(this)
+            val localizationSharedPreferences: LocalizationSharedPreferences = LocalizationSharedPreferences(this)
             localizationSharedPreferences.clearSharedPreference()
             localizationSharedPreferences.save("city", cityName)
             localizationSharedPreferences.save("country", countryCode)

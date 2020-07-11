@@ -19,8 +19,6 @@ class WeekWeather: AppCompatActivity() {
     private var date = ArrayList<String>()
     private var icon = ArrayList<String>()
 
-
-    var weekWeatherArray = ArrayList<HashMap<String, String>>()
     private var longitude: String? = null
     private var latitude: String? = null
     private var localization: String = ""
@@ -174,6 +172,5 @@ class WeekWeather: AppCompatActivity() {
         startActivity(intent)
 
     }
-
 
 }

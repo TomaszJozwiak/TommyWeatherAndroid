@@ -48,7 +48,6 @@ class CurrentWeatherCalculations(private val cityName: String?, private val coun
         )
 
         setMap(weather)
-        example()
     }
 
 
@@ -80,22 +79,6 @@ class CurrentWeatherCalculations(private val cityName: String?, private val coun
 
         temp = iconName.substring(iconName.lastIndex) + iconName.substring(0, 2)
         return temp
-
-    }
-
-    private fun example() {
-
-        println(weatherMap["longitude"])
-        println(weatherMap["latitude"])
-        println(weatherMap["description"])
-        println(weatherMap["icon"])
-        println(weatherMap["temperature"])
-        println(weatherMap["pressure"])
-        println(weatherMap["humidity"])
-        println(weatherMap["wind"])
-        println(weatherMap["clouds"])
-        println(weatherMap["country"])
-        println(weatherMap["city"])
 
     }
 

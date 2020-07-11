@@ -3,7 +3,7 @@ package com.tommyapps.weatheronandroid
 import android.content.Context
 import android.content.SharedPreferences
 
-class LocalizationSharedPreferences(val context: Context) {
+class LocalizationSharedPreferences(private val context: Context) {
 
     private val sharedPref: SharedPreferences = context.getSharedPreferences("localization", Context.MODE_PRIVATE)
 
@@ -26,13 +26,8 @@ class LocalizationSharedPreferences(val context: Context) {
 
         val editor: SharedPreferences.Editor = sharedPref.edit()
 
-        //sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-
         editor.clear()
         editor.apply()
     }
-
-
-
 
 }

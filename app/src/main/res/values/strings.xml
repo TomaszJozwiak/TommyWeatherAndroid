@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">WeatherOnAndroid</string>
+    <string name="cityTextView">Miasto</string>
+    <string name="countryTextView">Państwo</string>
+    <string name="changeLocalization">Zmiana lokalizacji</string>
+    <string name="descriptionTextView">Opis</string>
+    <string name="temperatureTextView">Temperatura</string>
+    <string name="pressureTextView">Ciśnienie</string>
+    <string name="humidityTextView">Wilgotność</string>
+    <string name="windTextView">Wiatr</string>
+    <string name="cloudsTextView">Zachmurzenie</string>
+    <string name="weekWeather">Pogoda Tygodniowa</string>
+    <string name="hourWeather">Pogoda Godzinowa</string>
+    <string name="weatherIcon">Ikona</string>
+    <string name="chooseLocalization">Wybierz lokalizację</string>
+    <string name="chooseCountry">Wybierz państwo</string>
+    <string name="chooseCity">Wybierz miasto</string>
+    <string name="showWeather">Pokaż Pogodę</string>
+    <string name="defaultLocalization">Lokalizacja domyślna</string>
+    <string name="currentWeather">Aktualna Pogoda</string>
+    <string name="LocalizationTextView">Lokalizacja</string>
+    <string name="dateTextView">Data</string>
 </resources>

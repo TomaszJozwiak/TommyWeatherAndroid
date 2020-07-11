@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#BCDCEF"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:gravity="center_vertical"
-        android:hint="Wybierz państwo"
+        android:hint="@string/chooseCountry"
         android:maxLines="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,7 +25,7 @@
         android:id="@+id/countryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Państwo"
+        android:text="@string/countryTextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Wybierz lokalizację"
+        android:text="@string/chooseLocalization"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Miasto"
+        android:text="@string/cityTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countryAutoCompleteTextView" />
@@ -57,13 +58,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Wybierz miasto"
+        android:hint="@string/chooseCity"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cityTextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/showWeatherButton"
@@ -72,7 +74,7 @@
         android:layout_height="wrap_content"
         android:onClick="showWeather"
         android:background="@drawable/round_button"
-        android:text="Show Weather"
+        android:text="@string/showWeather"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,8 +86,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Lokalizacja domyślna"
+        android:text="@string/defaultLocalization"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cityEditText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

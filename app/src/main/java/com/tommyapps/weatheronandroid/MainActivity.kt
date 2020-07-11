@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     var windTextView: TextView? = null
     var cloudsTextView: TextView? = null
     var iconImageView: ImageView? = null
-
     var weatherMap = HashMap<String, String>()
 
 
@@ -53,7 +52,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun setAttributes(map: HashMap<String, String>) {
 
         cityTextView?.text = map["city"]
@@ -83,11 +81,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
-
-
-    //list View test
     fun weekWeather(view: View) {
 
         val intent = Intent(this, WeekWeather::class.java)
@@ -108,7 +101,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun checkDefaultLocalization() {
 
         var localizationSharedPreferences: LocalizationSharedPreferences = LocalizationSharedPreferences(this)
@@ -123,12 +115,7 @@ class MainActivity : AppCompatActivity() {
 
             setAttributes(weatherMap)
         }
-
-
     }
-
-
-
 
 
 }
